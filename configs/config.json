@@ -1,0 +1,8 @@
+{
+    "server": {
+        "port": 8080
+    },
+    "database": {
+        "connectionString": "mongodb+srv://sa:kC8Yf*HEX3v82VwH@cluster0.gghum.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    }
+}
