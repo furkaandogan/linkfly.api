@@ -1,6 +1,6 @@
-# build:
-#   languages:
-#     - go
+build:
+  docker:
+    web: Dockerfile
 
 run:
-  web: go run ./main.go
+  web: ./api.linkfly.com
