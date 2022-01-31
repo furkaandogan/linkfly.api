@@ -3,9 +3,9 @@ package repository
 import (
 	"context"
 
+	domain_linkly "api.linkfly.com/domain/linkly"
+	"api.linkfly.com/pkg/mongo"
 	"go.mongodb.org/mongo-driver/bson"
-	domain_linkly "linkfly.api/domain/linkly"
-	"linkfly.api/pkg/mongo"
 )
 
 const (

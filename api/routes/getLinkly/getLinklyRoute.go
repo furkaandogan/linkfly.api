@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	application_getlinkly "api.linkfly.com/application/getLinkly"
+	echo_customcontext "api.linkfly.com/pkg/echo/customContext"
 	"github.com/labstack/echo/v4"
-	application_getlinkly "linkfly.api/application/getLinkly"
-	echo_customcontext "linkfly.api/pkg/echo/customContext"
 )
 
 func GetLinklyRoute(e *echo.Echo) {

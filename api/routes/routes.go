@@ -1,9 +1,9 @@
 package routes
 
 import (
+	create_route "api.linkfly.com/api/routes/createLinkly"
+	get_route "api.linkfly.com/api/routes/getLinkly"
 	"github.com/labstack/echo/v4"
-	create_route "linkfly.api/api/routes/createLinkly"
-	get_route "linkfly.api/api/routes/getLinkly"
 )
 
 func RegisterRoute(e *echo.Echo) {

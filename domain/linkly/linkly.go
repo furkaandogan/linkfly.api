@@ -4,8 +4,8 @@ import (
 	"strings"
 	"time"
 
+	stringrandom "api.linkfly.com/pkg/stringRandom"
 	"github.com/google/uuid"
-	stringrandom "linkfly.api/pkg/stringRandom"
 )
 
 type Linkly struct {

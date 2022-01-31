@@ -3,14 +3,14 @@ package main
 import (
 	"context"
 
+	routes "api.linkfly.com/api/routes"
+	"api.linkfly.com/configs"
+	domain_linkly "api.linkfly.com/domain/linkly"
+	"api.linkfly.com/infrastructure/repository"
+	echo_customcontext "api.linkfly.com/pkg/echo/customContext"
+	"api.linkfly.com/pkg/mongo"
 	"github.com/golobby/container/v3"
 	"github.com/labstack/echo/v4"
-	routes "linkfly.api/api/routes"
-	"linkfly.api/configs"
-	domain_linkly "linkfly.api/domain/linkly"
-	"linkfly.api/infrastructure/repository"
-	echo_customcontext "linkfly.api/pkg/echo/customContext"
-	"linkfly.api/pkg/mongo"
 )
 
 func main() {

@@ -3,8 +3,8 @@ package application_createlinkly
 import (
 	"context"
 
+	linkfly "api.linkfly.com/domain/linkly"
 	"github.com/golobby/container/v3"
-	linkfly "linkfly.api/domain/linkly"
 )
 
 type CreateLinklyCommand struct {

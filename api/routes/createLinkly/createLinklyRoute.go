@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	application_createlinkly "api.linkfly.com/application/createLinkly"
+	echo_customcontext "api.linkfly.com/pkg/echo/customContext"
 	"github.com/labstack/echo/v4"
-	application_createlinkly "linkfly.api/application/createLinkly"
-	echo_customcontext "linkfly.api/pkg/echo/customContext"
 )
 
 type CreateLinklyRequest struct {

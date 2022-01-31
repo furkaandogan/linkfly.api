@@ -1,4 +1,4 @@
-module linkfly.api
+module api.linkfly.com
 
 go 1.15
 
