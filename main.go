@@ -30,10 +30,7 @@ func containerRegister() {
 	})
 
 	container.Singleton(func() mongo.Database {
-		var configs configs.Configs
-		if err := container.Resolve(&configs); err != nil {
-			panic(err)
-		}
+		configs := configs.Load()
 		return mongo.Connect(context.Background(), mongo.DatabaseConfig{
 			ConnectionString: configs.Database.ConnectionString,
 		})
