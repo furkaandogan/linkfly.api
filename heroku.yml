@@ -1,6 +1,6 @@
-build:
-  languages:
-    - go
+# build:
+#   languages:
+#     - go
 
 run:
-  web: go-getting-started
+  web: go run ./main.go
