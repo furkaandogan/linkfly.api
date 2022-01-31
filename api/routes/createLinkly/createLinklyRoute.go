@@ -9,12 +9,25 @@ import (
 	echo_customcontext "linkfly.api/pkg/echo/customContext"
 )
 
+type CreateLinklyRequest struct {
+	Link string `json:"link"`
+}
+
+type CreateLinklyResponse struct {
+}
+
 func CreateLinklyRoute(e *echo.Echo) {
 	e.POST("/", func(c echo.Context) error {
 		customContext := c.(*echo_customcontext.CustomContext)
+		requestBody := CreateLinklyRequest{}
+
+		if err := (&echo.DefaultBinder{}).BindBody(customContext, &requestBody); err != nil {
+			return err
+		}
+
 		command := application_createlinkly.CreateLinklyCommand{
 			IP:        customContext.GetIP(),
-			Url:       "www.google.com",
+			Url:       requestBody.Link,
 			Useragent: c.Request().UserAgent(),
 		}
 		result, _ := command.Execute(context.Background())

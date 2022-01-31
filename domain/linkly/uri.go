@@ -1,5 +1,11 @@
 package domain_linkly
 
+import urlHelpers "net/url"
+
+const (
+	hostRegex = "(^(.*:)//)|([A-Za-z0-9\\-\\.]+)(:[0-9]+)?(.*)$"
+)
+
 type Uri struct {
 	Host    string
 	Path    string
@@ -8,7 +14,14 @@ type Uri struct {
 }
 
 func NewUri(url string) Uri {
+	uri, err := urlHelpers.Parse(url)
+	if err != nil {
+		panic(err)
+	}
+
 	return Uri{
+		Host:    uri.Host,
+		Path:    uri.Path,
 		FullUrl: url,
 	}
 }
