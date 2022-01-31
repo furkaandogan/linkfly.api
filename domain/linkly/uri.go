@@ -22,6 +22,7 @@ func NewUri(url string) Uri {
 	return Uri{
 		Host:    uri.Host,
 		Path:    uri.Path,
+		Query:   uri.RawQuery,
 		FullUrl: url,
 	}
 }

@@ -27,6 +27,12 @@ func (command *GetLinklyCommand) Execute(context context.Context) (GetLinklyComm
 		panic(err)
 	}
 
+	linkly.Visited()
+
+	if result, err := linklyRepository.Update(context, linkly); err != nil || !result {
+		panic(err)
+	}
+
 	return GetLinklyCommandResult{
 		Linkly: linkly,
 	}, nil

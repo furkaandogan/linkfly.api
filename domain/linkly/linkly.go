@@ -18,6 +18,11 @@ type Linkly struct {
 	Metrics     Metric
 }
 
+func (self *Linkly) Visited() *Linkly {
+	self.Metrics.Visited += 1
+	return self
+}
+
 func NewLinkly(url string, createdUseragent string, createdUserIp string) Linkly {
 	uuid, _ := uuid.NewUUID()
 
@@ -25,10 +30,13 @@ func NewLinkly(url string, createdUseragent string, createdUserIp string) Linkly
 
 	hash := strings.ToLower(stringrandom.RandString(4))
 
+	createdUser := NewUser(createdUserIp, createdUseragent)
+
 	return Linkly{
 		Id:          uuid.String(),
 		CreatedDate: time.Now(),
 		UpdatedDate: time.Now(),
+		CreatedUser: createdUser,
 		Uri:         uri,
 		Hash:        hash,
 		Metrics:     Metric{},

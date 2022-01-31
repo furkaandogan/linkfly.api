@@ -26,6 +26,18 @@ func (respository LinklyRepository) Insert(context context.Context, linkly *doma
 	return result.InsertedID != nil, nil
 }
 
+func (respository LinklyRepository) Update(context context.Context, linkly *domain_linkly.Linkly) (bool, error) {
+	collection := respository.Database.GetCollection(databaseName, collectionName)
+	filter := bson.M{
+		"_id": linkly.Id,
+	}
+	result, err := collection.ReplaceOne(context, filter, linkly)
+	if err != nil {
+		return false, err
+	}
+	return result.MatchedCount > 0, nil
+}
+
 func (respository LinklyRepository) IsExists(context context.Context, hash string) (bool, error) {
 	collection := respository.Database.GetCollection(databaseName, collectionName)
 	filter := bson.M{
