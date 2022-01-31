@@ -1,22 +1,21 @@
-FROM golang:alpine
-RUN go version
+FROM heroku/heroku:20-build as build
 
-ADD . /go/src/app
-WORKDIR /go/src/app
+COPY . /app
+WORKDIR /app
 
-# Expose 8080
-# Gin will use the PORT env var
-ENV PORT 8080
-EXPOSE 8080
+# Setup buildpack
+RUN mkdir -p /tmp/buildpack/heroku/go /tmp/build_cache /tmp/env
+RUN curl https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpack/heroku/go
 
-# Install git
-RUN apk add --no-cache git
-# Fetch deps
-RUN go get
-# Remove git
-RUN apk del git
+#Execute Buildpack
+RUN STACK=heroku-20 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /tmp/env
 
-# Compile app
-RUN go build -o main .
-# Run app
-CMD ["/go/src/app/main"]
+# Prepare final, minimal image
+FROM heroku/heroku:20
+
+COPY --from=build /app /app
+ENV HOME /app
+WORKDIR /app
+RUN useradd -m heroku
+USER heroku
+CMD /app/bin/go-getting-started
