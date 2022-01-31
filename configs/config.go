@@ -29,5 +29,10 @@ func Load() Configs {
 	}
 	jsonParser := json.NewDecoder(configFile)
 	jsonParser.Decode(&config)
+	port := os.Getenv("PORT")
+
+	if port != "" {
+		config.Server.Port = port
+	}
 	return config
 }

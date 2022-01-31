@@ -12,7 +12,7 @@
             "env": {
                 "env":"dev"
             },
-            "program": "${workspaceFolder}/server.go"
+            "program": "${workspaceFolder}/main.go"
         }
     ]
 }
