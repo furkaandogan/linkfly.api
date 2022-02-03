@@ -9,13 +9,14 @@ import (
 )
 
 type Linkly struct {
-	Id          string `bson:"_id"`
-	CreatedDate time.Time
-	UpdatedDate time.Time
-	CreatedUser User
-	Hash        string
-	Uri         Uri
-	Metrics     Metric
+	Id           string `bson:"_id"`
+	CreatedDate  time.Time
+	UpdatedDate  time.Time
+	CreatedUser  User
+	Hash         string
+	Uri          Uri
+	Metrics      Metric
+	FocusElement *FocusElement
 }
 
 func (self *Linkly) Visited() *Linkly {
@@ -41,4 +42,10 @@ func NewLinkly(url string, createdUseragent string, createdUserIp string) Linkly
 		Hash:        hash,
 		Metrics:     Metric{},
 	}
+}
+
+func NewLinklyWithFocusElement(url string, xpath string, createdUseragent string, createdUserIp string) Linkly {
+	linkly := NewLinkly(url, createdUseragent, createdUserIp)
+	linkly.FocusElement = NewFocusElement(xpath)
+	return linkly
 }
