@@ -17,7 +17,7 @@ type CreateLinklyWithFocusElementRequest struct {
 type CreateLinklyWithFocusElementResponse struct {
 }
 
-func CreateLinklyRoute(e *echo.Echo) {
+func CreateLinklyWithFocusElementRoute(e *echo.Echo) {
 	e.POST("/focus-element", func(c echo.Context) error {
 		customContext := c.(*echo_customcontext.CustomContext)
 		requestBody := CreateLinklyWithFocusElementRequest{}
