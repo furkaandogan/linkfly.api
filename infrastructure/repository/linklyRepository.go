@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	domain_linkly "api.linkfly.com/domain/linkly"
+	"api.linkfly.com/domain/linkly"
 	"api.linkfly.com/pkg/mongo"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -17,7 +17,7 @@ type LinklyRepository struct {
 	Database mongo.Database
 }
 
-func (respository LinklyRepository) Insert(context context.Context, linkly *domain_linkly.Linkly) (bool, error) {
+func (respository LinklyRepository) Insert(context context.Context, linkly *linkly.Linkly) (bool, error) {
 	collection := respository.Database.GetCollection(databaseName, collectionName)
 	result, err := collection.InsertOne(context, linkly)
 	if err != nil {
@@ -26,7 +26,7 @@ func (respository LinklyRepository) Insert(context context.Context, linkly *doma
 	return result.InsertedID != nil, nil
 }
 
-func (respository LinklyRepository) Update(context context.Context, linkly *domain_linkly.Linkly) (bool, error) {
+func (respository LinklyRepository) Update(context context.Context, linkly *linkly.Linkly) (bool, error) {
 	collection := respository.Database.GetCollection(databaseName, collectionName)
 	filter := bson.M{
 		"_id": linkly.Id,
@@ -44,7 +44,7 @@ func (respository LinklyRepository) IsExists(context context.Context, hash strin
 		"hash": hash,
 	}
 
-	link := domain_linkly.Linkly{}
+	link := linkly.Linkly{}
 
 	if err := collection.FindOne(context, filter).Decode(&link); err != nil {
 		return false, err
@@ -53,13 +53,13 @@ func (respository LinklyRepository) IsExists(context context.Context, hash strin
 	return link.Id != "", nil
 
 }
-func (respository LinklyRepository) Get(context context.Context, hash string) (*domain_linkly.Linkly, error) {
+func (respository LinklyRepository) Get(context context.Context, hash string) (*linkly.Linkly, error) {
 	collection := respository.Database.GetCollection(databaseName, collectionName)
 	filter := bson.M{
 		"hash": hash,
 	}
 
-	link := &domain_linkly.Linkly{}
+	link := &linkly.Linkly{}
 
 	if err := collection.FindOne(context, filter).Decode(&link); err != nil {
 		return nil, err
@@ -68,8 +68,23 @@ func (respository LinklyRepository) Get(context context.Context, hash string) (*
 	return link, nil
 
 }
+func (respository LinklyRepository) Gets(context context.Context, userId string) (*[]linkly.Linkly, error) {
+	collection := respository.Database.GetCollection(databaseName, collectionName)
+	filter := bson.M{
+		"user.id": userId,
+	}
 
-func NewLinklyRepository(database mongo.Database) domain_linkly.ILinklyRepository {
+	link := &linkly.Linkly{}
+
+	if err := collection.FindOne(context, filter).Decode(&link); err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+
+}
+
+func NewLinklyRepository(database mongo.Database) linkly.ILinklyRepository {
 	return &LinklyRepository{
 		Database: database,
 	}

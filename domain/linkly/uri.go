@@ -1,4 +1,4 @@
-package domain_linkly
+package linkly
 
 import urlHelpers "net/url"
 

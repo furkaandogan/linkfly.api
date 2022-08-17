@@ -1,4 +1,4 @@
-package domain_linkly
+package linkly
 
 import (
 	"strings"
@@ -24,14 +24,14 @@ func (self *Linkly) Visited() *Linkly {
 	return self
 }
 
-func NewLinkly(url string, createdUseragent string, createdUserIp string) Linkly {
+func NewLinkly(url string, userId string, createdUseragent string, createdUserIp string) Linkly {
 	uuid, _ := uuid.NewUUID()
 
 	uri := NewUri(url)
 
 	hash := strings.ToLower(stringrandom.RandString(4))
 
-	createdUser := NewUser(createdUserIp, createdUseragent)
+	createdUser := NewUser(userId, createdUserIp, createdUseragent)
 
 	return Linkly{
 		Id:          uuid.String(),
@@ -44,8 +44,8 @@ func NewLinkly(url string, createdUseragent string, createdUserIp string) Linkly
 	}
 }
 
-func NewLinklyWithFocusElement(url string, xpath string, createdUseragent string, createdUserIp string) Linkly {
-	linkly := NewLinkly(url, createdUseragent, createdUserIp)
+func NewLinklyWithFocusElement(url string, xpath string, userId string, createdUseragent string, createdUserIp string) Linkly {
+	linkly := NewLinkly(url, userId, createdUseragent, createdUserIp)
 	linkly.FocusElement = NewFocusElement(xpath)
 	return linkly
 }

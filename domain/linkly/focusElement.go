@@ -1,4 +1,4 @@
-package domain_linkly
+package linkly
 
 type FocusElement struct {
 	XPath string

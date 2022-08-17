@@ -5,7 +5,7 @@ import (
 
 	routes "api.linkfly.com/api/routes"
 	"api.linkfly.com/configs"
-	domain_linkly "api.linkfly.com/domain/linkly"
+	linkly "api.linkfly.com/domain/linkly"
 	"api.linkfly.com/infrastructure/repository"
 	echo_customcontext "api.linkfly.com/pkg/echo/customContext"
 	"api.linkfly.com/pkg/mongo"
@@ -36,7 +36,7 @@ func containerRegister() {
 		})
 	})
 
-	container.Singleton(func() domain_linkly.ILinklyRepository {
+	container.Singleton(func() linkly.ILinklyRepository {
 		var database mongo.Database
 		if err := container.Resolve(&database); err != nil {
 			panic(err)
